@@ -2,19 +2,19 @@
   {
     "description": "uplink pressure device",
     "type": "uplink",
-    "bytes": "024591a40c6b009a999343",
+    "bytes": "0289a3fce418001fe58543",
     "fPort": 1,
     "time": "2022-06-28T14:00:00.000+02:00",
     "data": {
       "sensorType" : "TEMPERATURE RTD",
       "messageType" : "PERIODIC",
-      "batteryLevel": 81,
-      "version": "1.1.0",
-      "deviceTemperature": 297,
-      "deviceShock": 3425,
+      "batteryLevel": 98,
+      "version": "1.2.1",
+      "deviceTemperature": 319,
+      "deviceShock": 796,
       "flags": "00000000",
       "sensorData": {
-        "temperature": 295.20001220703125
+        "temperature": 267.7900085449219
       }
     }
   }

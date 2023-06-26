@@ -35,7 +35,7 @@ function decodeUplink(input) {
     }
 
     if (type < 5) {
-        result = decodeTrameDate(binary, type, bytes);
+        result = decodeTrameData(binary, type, bytes);
     } else if (type === 255) {
         result = decodeTrameConfig(binary, bytes);
     }
@@ -112,12 +112,12 @@ function decodeTrameConfig(binary, bytes) {
     return result;
 }
 
-function decodeTrameDate(binary, type, bytes) {
+function decodeTrameData(binary, type, bytes) {
     if (bytes.length > 15) {
         throw new Error("Invalid uplink payload: length exceeds 15 bytes");
     }
     var sensorType = ['NONE', 'PRESSURE', 'TEMPERATURE RTD', 'MOTION', 'TEMPERATURE TCK'];
-    var messageTypes = [ 'TEST', 'PERIODIC', 'ALERT', 'LOG', 'LORAWAN', 'ALARM'];
+    var messageTypes = [ 'FIRST', 'PERIODIC', 'ALERT', 'LOG', 'LORAWAN', 'ALARM'];
     let result = {}
     result.sensorType = sensorType[type];
     binary = binary.slice(0, -8);
@@ -139,7 +139,7 @@ function decodeTrameDate(binary, type, bytes) {
     binary = binary.slice(0, -8);
     result.sensorData = {};
 
-    if (result.messageType === 'PERIODIC') {
+    if (result.messageType === 'PERIODIC' || result.messageType === 'ALERT' ) {
         if (result.sensorType === 'PRESSURE') {
             result.sensorData.pressure = binaryToFloat32(binary.slice(-32));
             binary = binary.slice(0, -32);
@@ -147,7 +147,9 @@ function decodeTrameDate(binary, type, bytes) {
         } else if (result.sensorType === 'TEMPERATURE RTD' || result.sensorType === 'TEMPERATURE TCK') {
             result.sensorData.temperature = binaryToFloat32(binary.slice(-32));
         } else if (result.sensorType === 'MOTION') {
-            result.sensorData.motion = parseInt(binary.slice(-8),2);
+            result.sensorData.openingPercentage = parseInt(binary.slice(-8),2);
+            binary = binary.slice(0, -8);
+            result.sensorData.openingTime = parseInt(binary.slice(-8),2);
         }
     }
 

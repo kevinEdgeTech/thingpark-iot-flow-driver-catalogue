@@ -1,20 +1,41 @@
 [
   {
-    "description": "uplink pressure device",
+    "description": "uplink motion device",
     "type": "uplink",
-    "bytes": "034591a40c6b0032",
+    "bytes": "0385a3bcc41b000000",
     "fPort": 1,
     "time": "2022-06-28T14:00:00.000+02:00",
     "data": {
       "sensorType" : "MOTION",
       "messageType" : "PERIODIC",
-      "batteryLevel": 81,
-      "version": "1.1.0",
-      "deviceTemperature": 297,
-      "deviceShock": 3425,
+      "batteryLevel": 97,
+      "version": "1.2.1",
+      "deviceTemperature": 303,
+      "deviceShock": 888,
       "flags": "00000000",
       "sensorData": {
-        "motion": 50
+        "openingPercentage": 0,
+        "openingTime": 0
+      }
+    }
+  } ,
+  {
+    "description": "uplink motion device Alert",
+    "type": "uplink Alert",
+    "bytes": "0386a3bcc41b00130b",
+    "fPort": 1,
+    "time": "2022-06-28T14:00:00.000+02:00",
+    "data": {
+      "sensorType" : "MOTION",
+      "messageType" : "ALERT",
+      "batteryLevel": 97,
+      "version": "1.2.1",
+      "deviceTemperature": 303,
+      "deviceShock": 888,
+      "flags": "00000000",
+      "sensorData": {
+        "openingPercentage": 19,
+        "openingTime": 19
       }
     }
   }
